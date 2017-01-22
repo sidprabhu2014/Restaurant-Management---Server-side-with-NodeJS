@@ -14,21 +14,20 @@ exports.verifyOrdinaryUser = function (req, res, next) {
 
     // decode token
     if (token) {
-        // verifies secret and checks exp
+        // verifies secret
         jwt.verify(token, config.secretKey, function (err, decoded) {
             if (err) {
                 var err = new Error('You are not authenticated!');
                 err.status = 401;
                 return next(err);
             } else {
-                // if everything is good, save to request for use in other routes
+                // all ok, save to request for use in other routes
                 req.decoded = decoded;
                 next();
             }
         });
     } else {
-        // if there is no token
-        // return an error
+        // if no token found return an error
         var err = new Error('No token provided!');
         err.status = 403;
         return next(err);
@@ -42,7 +41,7 @@ exports.verifyAdmin = function (req, res, next) {
             err.status = 401;
             return next(err);
         } else {
-            // if everything is good, save to request for use in other routes
+            // all ok, save to request for use in other routes
             req.decoded = decoded;
             if(req.decoded.admin){
             next();
@@ -55,8 +54,7 @@ exports.verifyAdmin = function (req, res, next) {
             }
         }
     });}else {
-        // if there is no token
-        // return an error
+        // if no token found return an error
         var err = new Error('No token provided!');
         err.status = 403;
         return next(err);

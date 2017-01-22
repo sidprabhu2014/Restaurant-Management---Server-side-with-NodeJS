@@ -4,7 +4,7 @@ var passport = require('passport');
 var User = require('../models/user');
 var Verify    = require('./verify');
 
-/* GET users listing. */
+//list of users
 router.get('/',Verify.verifyAdmin, function(req, res, next) {
   User.find({},function (err,users) {
     if(err) throw  err;

@@ -28,7 +28,7 @@ exports.facebook = passport.use(new FacebookStrategy({
                 user.OauthToken = accessToken;
                 user.save(function(err) {
                     if(err) {
-                        console.log(err); // handle errors!
+                        console.log(err); 
                     } else {
                         console.log("saving user ...");
                         done(null, user);

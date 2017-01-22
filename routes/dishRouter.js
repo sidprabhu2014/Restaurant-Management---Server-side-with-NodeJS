@@ -114,8 +114,8 @@ dishRouter.route('/:dishId/comments/:commentId')
     })
 
     .put(Verify.verifyOrdinaryUser,function (req, res, next) {
-        // We delete the existing commment and insert the updated
-        // comment as a new comment
+        // delete and then insert i.e comment as a new comment
+        
         Dishes.findById(req.params.dishId, function (err, dish) {
                         if (err) next(err); 
             dish.comments.id(req.params.commentId).remove();
